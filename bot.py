@@ -70,7 +70,6 @@ class Main(Frame):
         self.thread.join()
         self.stop_btn.configure(state=DISABLED)
 
-
     def start(self):
         self.is_start = True
         self.stop_btn.configure(state=NORMAL)
@@ -99,13 +98,14 @@ class Main(Frame):
         else:
             config.CHAN = '#' + answer
             self.channel_lbl.configure(text=config.CHAN)
+            config.swap_channel(config.CHAN)
 
 
 if __name__ == '__main__':
     root = Tk()
     root['bg'] = "#FFF"
     root.geometry("500x500")
-    root.title("Парсер чата")
+    root.title("Twitch chat parser")
     root.resizable(FALSE, FALSE)
     app = Main(root)
     app.pack()

@@ -1,5 +1,16 @@
-HOST = 'irc.twitch.tv'
-PORT = 6667
-NICK = 'ReF0i1'
-PASS = 'oauth:cuezhm5sxiqg4o6b08wgq3vq3flhke'
-CHAN = '#elwycco'
+import configparser
+
+config = configparser.ConfigParser()
+config.read('settings.ini')
+
+HOST = config["Twitch"]["host"]
+PORT = int(config["Twitch"]["port"])
+NICK = config["Twitch"]["nick"]
+PASS = config["Twitch"]["pass"]
+CHAN = config["Twitch"]["chan"]
+
+
+def swap_channel(value):
+    config.set("Twitch", "chan", value)
+    with open('settings.ini', 'w') as configfile:
+        config.write(configfile)
