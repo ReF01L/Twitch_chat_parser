@@ -14,6 +14,7 @@ class Main(Frame):
             self.is_start = False
 
         def run(self):
+            self.is_start = True
             logging.basicConfig(
                 level=logging.DEBUG,
                 format='%(asctime)s — %(message)s',
@@ -21,13 +22,10 @@ class Main(Frame):
                 handlers=[logging.FileHandler('chat.log', encoding='utf-8')]
             )
 
-            self.is_start = True
             while self.is_start:
                 resp = self.sock.recv(2048).decode('utf-8')
 
-                if resp.startswith('PING'):
-                    self.sock.send('PONG\n'.encode('utf-8'))
-                elif len(resp) > 0:
+                if len(resp) > 0:
                     logging.info(resp)
 
             self.sock.close()

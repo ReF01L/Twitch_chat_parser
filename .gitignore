@@ -131,5 +131,4 @@ dmypy.json
 # Mine ignore
 output
 .idea
-chat.log
 settings.ini
