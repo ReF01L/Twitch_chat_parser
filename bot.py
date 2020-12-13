@@ -4,7 +4,7 @@ import logging
 from tkinter import *
 from tkinter import simpledialog, messagebox
 import threading
-
+from emoji import demojize
 
 class Main(Frame):
     class MyThread(threading.Thread):
@@ -25,8 +25,11 @@ class Main(Frame):
             while self.is_start:
                 resp = self.sock.recv(2048).decode('utf-8')
 
-                if len(resp) > 0:
-                    logging.info(resp)
+                if resp.startswith('PING'):
+                    self.sock.send("PONG\n".encode('utf-8'))
+
+                elif len(resp) > 0:
+                    logging.info(demojize(resp))
 
             self.sock.close()
 
